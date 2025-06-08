@@ -1,0 +1,10 @@
+{
+  "students": [
+    {
+      "id": "SV001",
+      "name": "Nguyễn Văn A",
+      "phone": "0123456789",
+      "email": "nguyenvana@gmail.com"
+    }
+  ]
+}
