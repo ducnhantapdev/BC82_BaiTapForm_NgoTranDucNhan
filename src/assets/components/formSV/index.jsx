@@ -19,6 +19,7 @@ export default function FormSV() {
 
   const onSubmit = (data) => {
     // Tạo ID mới tự động (có thể cải thiện sau)
+
     const newStudent = {
       id: data.id,
       name: data.name,
@@ -26,7 +27,9 @@ export default function FormSV() {
       email: data.email,
     };
 
-    isUpdate ? dispatch(updateStudent(data)) : dispatch(addStudent(newStudent));
+    isUpdate
+      ? dispatch(updateStudent(data)) && setIsUpdate(!isUpdate)
+      : dispatch(addStudent(newStudent));
     reset(); // reset form
   };
 
