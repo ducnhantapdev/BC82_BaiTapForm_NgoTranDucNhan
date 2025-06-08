@@ -15,11 +15,9 @@ export default function FormSV() {
   const students = useSelector((state) => state.studentSlice);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchType, setSearchType] = useState("name"); // 'id', 'name', or 'email'
+  const [searchType, setSearchType] = useState("name"); //
 
   const onSubmit = (data) => {
-    // Tạo ID mới tự động (có thể cải thiện sau)
-
     const newStudent = {
       id: data.id,
       name: data.name,
@@ -30,13 +28,12 @@ export default function FormSV() {
     isUpdate
       ? dispatch(updateStudent(data)) && setIsUpdate(!isUpdate)
       : dispatch(addStudent(newStudent));
-    reset(); // reset form
+    reset();
   };
 
   const handleUpdateStudent = (studentID) => {
     const svCanTim = students.students.find((item) => item.id === studentID);
     if (svCanTim) {
-      // Sử dụng setValue để cập nhật giá trị form
       setValue("id", svCanTim.id);
       setValue("name", svCanTim.name);
       setValue("phone", svCanTim.phone);
