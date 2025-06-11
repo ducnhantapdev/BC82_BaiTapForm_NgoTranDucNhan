@@ -10,7 +10,13 @@ import { useState } from "react";
 
 export default function FormSV() {
   const [isUpdate, setIsUpdate] = useState(false);
-  const { register, handleSubmit, reset, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const students = useSelector((state) => state.studentSlice);
 
@@ -111,8 +117,17 @@ export default function FormSV() {
             id="maSV"
             disabled={isUpdate}
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-            {...register("id", { required: true })}
+            {...register("id", {
+              required: "Vui lòng nhập mã sinh viên",
+              pattern: {
+                value: /^[a-zA-Z0-9]+$/,
+                message: "Mã sinh viên chỉ được chứa chữ và số",
+              },
+            })}
           />
+          {errors.id && (
+            <p className="text-red-500 text-sm mt-1">{errors.id.message}</p>
+          )}
         </div>
 
         <div>
@@ -120,8 +135,17 @@ export default function FormSV() {
           <input
             id="hoTenSV"
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-            {...register("name", { required: true })}
+            {...register("name", {
+              required: "Vui lòng nhập họ tên",
+              pattern: {
+                value: /^[a-zA-ZÀ-ỹ\s]+$/,
+                message: "Họ tên chỉ được chứa chữ cái và khoảng trắng",
+              },
+            })}
           />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
         </div>
 
         <div>
@@ -129,8 +153,17 @@ export default function FormSV() {
           <input
             id="phoneSV"
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-            {...register("phone", { required: true })}
+            {...register("phone", {
+              required: "Vui lòng nhập số điện thoại",
+              pattern: {
+                value: /^0[0-9]{9}$/,
+                message: "Số điện thoại phải bắt đầu bằng số 0 và có 10 chữ số",
+              },
+            })}
           />
+          {errors.phone && (
+            <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
+          )}
         </div>
 
         <div>
@@ -138,8 +171,17 @@ export default function FormSV() {
           <input
             id="emailSV"
             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-            {...register("email", { required: true })}
+            {...register("email", {
+              required: "Vui lòng nhập email",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Email không hợp lệ",
+              },
+            })}
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="col-span-2">
